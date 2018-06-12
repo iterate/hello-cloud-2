@@ -1,0 +1,78 @@
+# Siden vi har laget et nytt cluster, så er det nødvendig å gi dashboard-brukeren tilgang først. 
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: kubernetes-dashboard
+  labels:
+    k8s-app: kubernetes-dashboard
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: kubernetes-dashboard
+  namespace: kube-system
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: hellocloud2
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: hellocloud2
+    spec:
+      containers:
+      - name: hellocloud2
+        image: gcr.io/app-iterate/hellocloud2
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 1
+          requests:
+            cpu: 25m
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 8
+          periodSeconds: 10
+        env:
+          - name: PORT
+            value: "80"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: hellocloud2
+  name: hellocloud2
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+  - nodePort: 30601
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: hellocloud2
+  type: NodePort
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: hellocloud2
+spec:
+    backend:
+      serviceName: hellocloud2
+      servicePort: 80

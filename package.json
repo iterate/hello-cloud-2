@@ -1,0 +1,15 @@
+{
+  "name": "hellocloud2",
+  "version": "1.0.0",
+  "description": "Hello Cloud 2.0 workshop",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --experimental-modules index.mjs"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "4.16.3"
+  }
+}
