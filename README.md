@@ -10,6 +10,7 @@ $ gcloud auth login
 $ gcloud auth application-default login
 $ gcloud auth configure-docker 
 $ gcloud config set compute/zone europe-west1-d
+$ gcloud config set project hello-cloud-2
 ```
 ## Opprette nytt cluster
 Logg inn på [Google cloud console](http://iter.at/hc2). Gå til [Kubernetes engine](http://iter.at/kub).
