@@ -5,6 +5,7 @@ Klon repoet. Installer [docker](https://docs.docker.com/docker-for-mac/install/)
 
 ## Setup gcloud
 ```
+$ gcloud components install kubectl
 $ gcloud auth login 
 $ gcloud auth application-default login
 $ gcloud auth configure-docker 
