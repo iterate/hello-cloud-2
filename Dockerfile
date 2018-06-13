@@ -13,7 +13,7 @@ COPY package.json /usr/src/app
 RUN npm install
 COPY . /usr/src/app
 
-#Listen to port 80
+#Exposed port
 EXPOSE 80
 
 #Do this when container-image is executed
