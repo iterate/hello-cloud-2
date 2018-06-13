@@ -13,11 +13,11 @@ $ gcloud config set compute/zone europe-west1-d
 $ gcloud config set project hello-cloud-2
 ```
 ## Opprette nytt cluster
-Logg inn på [Google cloud console](http://iter.at/hc02). Gå til [Kubernetes engine](http://iter.at/kub).
+Logg inn på [Google cloud console](http://iter.at/hcloud). Du skal nå være på prosjektet hello-cloud-2.
 
 Create cluster ->
 
-    Name = cluster-<dittnavn>
+    Name = cluster-<dittnavn>´´
     Machine type  = micro
     Zone = europe-west1-d
 
@@ -27,16 +27,16 @@ Connect -> kopier og kjør kodesnutten lokalt.
 ## Bygg og push docker image 
 
 ```
-hello-cloud-2 $ docker build . -t gcr.io/app-iterate/<dittnavn>
+hello-cloud-2 $ docker build . -t gcr.io/hello-cloud-2/<dittnavn>
 
 // Valgfritt
-$ docker run -it -p 80:80 gcr.io/app-iterate/<dittnavn>
+$ docker run -it -p 80:80 gcr.io/hello-cloud-2/<dittnavn>
 $ curl localhost
 
-$ docker push gcr.io/app-iterate/<dittnavn>
+$ docker push gcr.io/hello-cloud-2/<dittnavn>
 ```
 
-docker push dytter app-image til [Google cloud container registry](http://iter.at/gcr). 
+docker push dytter app-image til [Google cloud container registry](http://iter.at/gcr2). 
 
 
 ## Deploy docker image i clusteret
@@ -44,10 +44,10 @@ docker push dytter app-image til [Google cloud container registry](http://iter.a
 Endre kubernetes config til å bruke ditt nye docker image. 
 
 ```
-hello-cloud-2 $ ./kubernetes.yaml
+hello-cloud-2 $ kubernetes.yaml
 
-32: image: gcr.io/app-iterate/hellocloud2 -> 
-    image: gcr.io/app-iterate/<dittnavn>
+32: image: gcr.io/hello-cloud-2/hello-cloud-2 -> 
+    image: gcr.io/hello-cloud-2/<dittnavn>
 ```
 
 
@@ -77,7 +77,7 @@ $ google-chrome http://localhost:8001/ui
 
 `kubectl` er verktøyet vi bruker for å sende kommandoer til clusteret og gjøre endringer på ressurser. 
 
-Husk at `kubernetes.yaml` er basis-konfigurasjonen for ressursene vi jobber med og at du kan også kan gjøre endringer der og rulle disse ut med `kubectl apply -f`.
+Husk at `kubernetes.yaml` danner basis-konfigurasjonen for ressursene vi jobber med og at du kan også kan gjøre endringer der og rulle disse ut med `kubectl apply -f`.
 
 ### 1. Skalering
 
@@ -104,7 +104,7 @@ Gjør en endring på applikasjonen, bygg og deploy til clusteret.
 ```
  Kubernetes vil ikke hente et siste image hvis image tag er uendret.
 
- $ docker build . -t gcr.io/app-iterate/<dittnavn>:<tagname>
+ $ docker build . -t gcr.io/hello-cloud-2/<dittnavn>:<tagname>
 
 ```
 

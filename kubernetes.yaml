@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: hellocloud2
-        image: gcr.io/app-iterate/hellocloud2
+        image: gcr.io/hello-cloud-2/hello-cloud-2
         ports:
         - containerPort: 80
         resources:
