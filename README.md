@@ -108,7 +108,7 @@ Forsøk å opprette ressursene fra kubernetes.yaml i et 'development' namespace.
 
 Hent alle podder i alle namespaces: `kubectl get pods --all-namespaces`, legg merke til hellocloud2.
 
-Forsøk å slett alle services,deployments,ingress under 'development' namespace.
+Forsøk å slett alle services,deployments,ingress ressurser under 'development' namespace.
 
 ```
 $ kubectl delete 
