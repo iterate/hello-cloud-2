@@ -5,8 +5,8 @@ FROM node:10-alpine
 RUN mkdir -p /usr/src/app 
 WORKDIR /usr/src/app
 
-#Set environment variables
-ENV NODE_ENV production
+#Set environment variable
+ENV NODE_ENV development
 
 #Copy file into container
 COPY package.json /usr/src/app

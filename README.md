@@ -65,14 +65,6 @@ $ google-chrome <address>
 Hvis du får 404, vent litt til :)
 
 
-## Overvåke
-Kubernetes dashboard er en cluster applikasjon som gir oversikt over clusteret og alle deployments, pods, services, etc. som kjører der. 
-
-```
-$ kubectl proxy
-$ google-chrome http://localhost:8001/ui
-```
-
 ## Manage cluster
 
 `kubectl` er verktøyet vi bruker for å sende kommandoer til clusteret og gjøre endringer på ressurser. 
@@ -110,7 +102,21 @@ Gjør en endring på applikasjonen, bygg og deploy til clusteret.
 
 ### 4. Namespaces
 Namespaces grupperer ressurser som hører sammen og gjør det lettere å gjør operasjoner mot mange ressurser på en gang.
+Du kan ha like ressurser under forskjellige namespaces, eksempelvis "production" og "development". kubectl skiller på disse med en `--namespace` eller `-n` parameter. 
 
+Forsøk å opprette ressursene fra kubernetes.yaml i et 'development' namespace.
+
+Hent alle podder i alle namespaces: `kubectl get pods --all-namespaces`, legg merke til hellocloud2.
+
+Forsøk å slett alle services,deployments,ingress under 'development' namespace.
+
+```
+$ kubectl delete 
+```
+
+### 5. Environment variables
+
+Når appen viser forsiden skriver den ut NODE_ENV som er definert i `Dockerfile` og blir satt i appens container. Du kan overstyre disse i kubernetes. Sett NODE_ENV til noe annet uten å bygge imaget på nytt.
 
 ## Minicube
 
